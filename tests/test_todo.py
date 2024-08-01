@@ -11,13 +11,14 @@ def test_create_todo(client, token):
         headers={'Authorization': f'Bearer {token}'},
     )
 
+    response_json = response.json()
     assert response.status_code == HTTPStatus.OK
-    assert response.json() == {
-        'id': 1,
-        'title': 'Test',
-        'description': 'Test',
-        'state': 'draft',
-    }
+    assert 'id' in response_json
+    assert response_json['title'] == 'Test'
+    assert response_json['description'] == 'Test'
+    assert response_json['state'] == 'draft'
+    assert 'created_at' in response_json
+    assert 'updated_at' in response_json
 
 
 def test_list_todos_should_return_5_todos(session, client, user, token):
