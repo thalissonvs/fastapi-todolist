@@ -1,7 +1,7 @@
 ## Sobre o projeto
 
 O zero_fastapi se trata de uma implementação relativamente básica de uma API Rest com FastAPI.
-Se trata de uma lista TODO (à fazer), onde você pode cadastrar tarefas, adicionar descrição, 
+Se trata de uma lista to-do (à fazer), onde você pode cadastrar tarefas, adicionar descrição, 
 mudar status, etc, além de uma autenticação completa de usuários. Você pode conferir a documentação
 [aqui](https://zero-fastapi.fly.dev/redoc).
 
