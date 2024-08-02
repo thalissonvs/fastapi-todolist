@@ -13,12 +13,21 @@ def test_create_todo(client, token):
 
     response_json = response.json()
     assert response.status_code == HTTPStatus.OK
-    assert 'id' in response_json
+    assert (
+        list(response_json.keys()).sort()
+        == [
+            'id',
+            'title',
+            'description',
+            'state',
+            'created_at',
+            'updated_at',
+        ].sort()
+    )
     assert response_json['title'] == 'Test'
     assert response_json['description'] == 'Test'
     assert response_json['state'] == 'draft'
-    assert 'created_at' in response_json
-    assert 'updated_at' in response_json
+    assert response_json['created_at'] == response_json['updated_at']
 
 
 def test_list_todos_should_return_5_todos(session, client, user, token):

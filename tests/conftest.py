@@ -4,7 +4,7 @@ from factory import fuzzy
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from sqlalchemy.pool import StaticPool
+from testcontainers.postgres import PostgresContainer
 
 from fast_zero.app import app
 from fast_zero.database import get_session
@@ -32,18 +32,21 @@ class TodoFactory(factory.Factory):
 
 
 @pytest.fixture()
-def session():
-    engine = create_engine(
-        'sqlite:///:memory:',
-        connect_args={'check_same_thread': False},
-        poolclass=StaticPool,
-    )
+def session(engine):
     table_registry.metadata.create_all(engine)
 
     with Session(engine) as session:
         yield session
 
     table_registry.metadata.drop_all(engine)
+
+
+@pytest.fixture(scope='session')
+def engine():
+    with PostgresContainer('postgres:16', driver='psycopg') as postgres:
+        engine = create_engine(postgres.get_connection_url())
+        with engine.begin():
+            yield engine
 
 
 @pytest.fixture()
