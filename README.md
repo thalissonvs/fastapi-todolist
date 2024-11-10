@@ -1,28 +1,41 @@
-## Sobre o projeto
 
-O zero_fastapi se trata de uma implementação relativamente básica de uma API Rest com FastAPI.
-Se trata de uma lista to-do (à fazer), onde você pode cadastrar tarefas, adicionar descrição, 
-mudar status, etc, além de uma autenticação completa de usuários. Você pode conferir a documentação
-[aqui](https://zero-fastapi.fly.dev/redoc).
+## Badges
 
-## Como usar
+<p align="center">
+    <img src="https://github.com/thalissonvs/fastapi-todolist/actions/workflows/tests.yaml/badge.svg" alt="Tests">
+    <img src="https://tokei.rs/b1/github/thalissonvs/fastapi-todolist" alt="Total lines">
+    <img src="https://tokei.rs/b1/github/thalissonvs/fastapi-todolist?category=files" alt="Files">
+    <img src="https://tokei.rs/b1/github/thalissonvs/fastapi-todolist?category=comments" alt="Comments">
+</p>
 
-Você pode utilizar diretamente a url `https://zero-fastapi.fly.dev/` para testes.
-Caso queira utilizar sua própria infraestrutura, basta ter o Docker instalado.
-Então, execute o seguinte comando:
+## About the Project
 
+The zero_fastapi demonstrates a straightforward implementation of a REST API built with FastAPI. The 
+application implements a todo list system featuring task management capabilities including task 
+creation, description updates, status modifications, and comprehensive user authentication. Full API 
+documentation is available at [our Redoc interface](https://zero-fastapi.fly.dev/redoc).
+
+## Getting Started
+
+### Cloud Testing
+The API is deployed and available for testing at `https://zero-fastapi.fly.dev/`
+
+### Local Deployment
+Prerequisites:
+- Docker installed on your system
+
+To run locally, simply execute:
 ```bash
 docker compose up
 ```
 
-Ressaltando que você precisará definir suas variáveis de ambientes no arquivo .env:
+### Configuration
 
-```plain
-DATABASE_URL="SUA_URL"
-SECRET_KEY="your-secret-key"
-ALGORITHM="HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES=30
+The application requires environment variables to be set in a .env file:
+```plaintext
+# Required Environment Variables
+DATABASE_URL="YOUR_DATABASE_URL"    # Your database connection string
+SECRET_KEY="your-secret-key"       # JWT secret key
+ALGORITHM="HS256"                  # JWT encryption algorithm
+ACCESS_TOKEN_EXPIRE_MINUTES=30     # Token expiration time in minutes
 ```
-
-Graças ao SQLAlchemy, você pode utilizar praticamente qualquer banco de dados apenas alterando
-a variável de conexão. Incrível, né?
